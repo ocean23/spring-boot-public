@@ -1,0 +1,7 @@
+logging:
+  level:
+    com:
+      netflix:
+        util:
+          concurrent:
+            ShutdownEnabledTimer: WARN

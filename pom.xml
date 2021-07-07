@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.5.2</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>com.fujfu</groupId>
+    <artifactId>spring-boot-public</artifactId>
+    <version>1.0.0.RELEASE</version>
+    <name>spring-boot-public</name>
+    <description>spring-boot项目</description>
+
+    <properties>
+        <java.version>11</java.version>
+        <spring-cloud.version>2020.0.3</spring-cloud.version>
+        <logstash-logback-encoder.version>6.6</logstash-logback-encoder.version>
+        <apollo.version>1.8.0</apollo.version>
+        <fastjson.version>1.2.76</fastjson.version>
+        <springfox-boot-starter.version>3.0.0</springfox-boot-starter.version>
+        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+        <spring-boot-maven-plugin.version>2.5.2</spring-boot-maven-plugin.version>
+        <powerjob.version>3.4.8</powerjob.version>
+        <redisson.version>3.16.0</redisson.version>
+        <piece-controller.version>2.1.1.RELEASE</piece-controller.version>
+        <piece-data.version>1.4.1.RELEASE</piece-data.version>
+        <piece-domain.version>1.1.7.RELEASE</piece-domain.version>
+        <piece-exception.version>1.1.7.RELEASE</piece-exception.version>
+        <piece-oss.version>2.1.1.RELEASE</piece-oss.version>
+        <piece-permission.version>3.1.1.RELEASE</piece-permission.version>
+        <piece-service.version>3.3.1.RELEASE</piece-service.version>
+        <piece-test-controller.version>2.1.2.RELEASE</piece-test-controller.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-consul-discovery</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-sleuth</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+        <!-- 加快spring的启动速度 -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-indexer</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>net.logstash.logback</groupId>
+            <artifactId>logstash-logback-encoder</artifactId>
+            <version>${logstash-logback-encoder.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.junit</groupId>
+                    <artifactId>junit</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.ctrip.framework.apollo/apollo-client -->
+        <dependency>
+            <groupId>com.ctrip.framework.apollo</groupId>
+            <artifactId>apollo-client</artifactId>
+            <version>${apollo.version}</version>
+        </dependency>
+
+        <!-- TODO: 以下是可选依赖，如果不需要的话请自行删除 -->
+        <!-- 与 JSON 解析相关 -->
+        <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fastjson.version}</version>
+        </dependency>
+        <!-- 与 Swagger 相关 -->
+        <!-- https://mvnrepository.com/artifact/io.springfox/springfox-boot-starter -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-boot-starter</artifactId>
+            <version>${springfox-boot-starter.version}</version>
+        </dependency>
+        <!-- 用于捕获 controller 的全局异常，并输出到日志 -->
+        <dependency>
+            <groupId>com.fujfu</groupId>
+            <artifactId>piece-controller</artifactId>
+            <version>${piece-controller.version}</version>
+        </dependency>
+        <!-- 用于快速构建 Response (PageableMO, ResponseMO 等) -->
+        <dependency>
+            <groupId>com.fujfu</groupId>
+            <artifactId>piece-data</artifactId>
+            <version>${piece-data.version}</version>
+        </dependency>
+        <!-- 用定义了常用的 exception -->
+        <dependency>
+            <groupId>com.fujfu</groupId>
+            <artifactId>piece-exception</artifactId>
+            <version>${piece-exception.version}</version>
+        </dependency>
+        <!-- 阿里云 OSS 相关 -->
+        <dependency>
+            <groupId>com.fujfu</groupId>
+            <artifactId>piece-oss</artifactId>
+            <version>${piece-oss.version}</version>
+        </dependency>
+        <!-- Domain 相关 -->
+        <dependency>
+            <groupId>com.fujfu</groupId>
+            <artifactId>piece-domain</artifactId>
+            <version>${piece-domain.version}</version>
+        </dependency>
+        <!-- 门户系统权限相关 -->
+        <dependency>
+            <groupId>com.fujfu</groupId>
+            <artifactId>piece-permission</artifactId>
+            <version>${piece-permission.version}</version>
+        </dependency>
+        <!-- 常用的服务，如 RemoteCallService -->
+        <dependency>
+            <groupId>com.fujfu</groupId>
+            <artifactId>piece-service</artifactId>
+            <version>${piece-service.version}</version>
+        </dependency>
+        <!-- 用于测试 Controller -->
+        <dependency>
+            <groupId>com.fujfu</groupId>
+            <artifactId>piece-test-controller</artifactId>
+            <version>${piece-test-controller.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- 引入power-job -->
+        <dependency>
+            <groupId>com.github.kfcfans</groupId>
+            <artifactId>powerjob-worker-spring-boot-starter</artifactId>
+            <version>${powerjob.version}</version>
+        </dependency>
+        <!-- 引入redis -->
+        <dependency>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson</artifactId>
+            <version>${redisson.version}</version>
+        </dependency>
+    </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>*.yml</include>
+                    <include>*.xml</include>
+                    <include>**/*.properties</include>
+                </includes>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
+                <configuration>
+                    <release>${java.version}</release>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring-boot-maven-plugin.version}</version>
+            </plugin>
+        </plugins>
+    </build>
+</project>

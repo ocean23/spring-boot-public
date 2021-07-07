@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- 引入这个resource才能解析,例如clr,wEx-->
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+
+    <springProperty scope="context" name="springAppName" source="spring.application.name" />
+
+    <property name="logDir" value="${log.dir:-./logs}" />
+    <property name="logPattern" value="%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}" />
+    <property name="jsonMsgLogPattern" value="%m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}" />
+
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <!-- Minimum logging level to be presented in the console logs-->
+            <level>DEBUG</level>
+        </filter>
+        <encoder>
+            <pattern>${logPattern}</pattern>
+            <charset>utf8</charset>
+        </encoder>
+    </appender>
+
+    <appender name="logstash" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${logDir}/${springAppName}.json</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy"><!-- rollover daily -->
+            <FileNamePattern>${logDir}/${springAppName}.json.%d{yyyy-MM-dd}.%i.zip</FileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>500MB</maxFileSize><!-- or whenever the file size reaches 5MB -->
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <!-- <maxHistory></maxHistory> -->
+        </rollingPolicy>
+        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <providers>
+                <timestamp>
+                    <timeZone>Asia/Shanghai</timeZone>
+                </timestamp>
+                <pattern>
+                    <pattern>
+                        {
+                        "severity": "%level",
+                        "service": "${springAppName:-}",
+                        "trace": "%X{X-B3-TraceId:-}",
+                        "span": "%X{X-B3-SpanId:-}",
+                        "parent": "%X{X-B3-ParentSpanId:-}",
+                        "exportable": "%X{X-Span-Export:-}",
+                        "pid": "${PID:-}",
+                        "thread": "%thread",
+                        "class": "%logger{40}",
+                        "rest": "${jsonMsgLogPattern}"
+                        }
+                    </pattern>
+                </pattern>
+            </providers>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="console" />
+        <appender-ref ref="logstash" />
+    </root>
+
+    <!--自定义包日志级别-->
+    <logger name="com.fujfu" level="INFO"/>
+    <logger name="org.springframework.data.mongodb.core" level="INFO"/>
+    <logger name="org.springframework.data.redis.clients" level="INFO"/>
+    <logger name="org.apache.catalina.startup.DigesterFactory" level="INFO"/>
+    <logger name="org.apache.catalina.util.LifecycleBase" level="INFO"/>
+    <logger name="org.apache.tomcat.util.net.NioSelectorPool" level="INFO"/>
+    <logger name="com.fujfu.trace.TraceIdFilter" level="INFO"/>
+    <logger name="org.springframework.boot.actuate.autoconfigure.CrshAutoConfiguration" level="INFO"/>
+
+</configuration>

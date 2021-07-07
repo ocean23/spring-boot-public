@@ -1,0 +1,20 @@
+apollo:
+  bootstrap:
+    enabled : true
+    eagerLoad:
+      enabled : true
+    namespaces : application
+
+spring:
+  application:
+    name: spring-boot-mongo
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      base-path: /actuator
+  endpoint:
+    health:
+      show-details: ALWAYS
