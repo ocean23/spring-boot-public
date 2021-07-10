@@ -1,6 +1,7 @@
 package com.fujfu.template.web.controller;
 
-import com.fujfu.piece.controller.mo.ResponseMO;
+import com.fujfu.template.web.controller.mo.DemoMO;
+import com.fujfu.template.web.controller.mo.ResponseMO;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,7 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class DemoController {
 
     @GetMapping("/hello")
-    public ResponseMO hello() {
-        return ResponseMO.successWithMessage("hello world");
+    public ResponseMO<DemoMO> hello() {
+        DemoMO demo = new DemoMO();
+        demo.setName("hello world");
+        return ResponseMO.successWithData(demo);
     }
 }

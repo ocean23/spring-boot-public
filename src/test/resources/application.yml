@@ -1,7 +1,11 @@
-logging:
-  level:
-    com:
-      netflix:
-        util:
-          concurrent:
-            ShutdownEnabledTimer: WARN
+server:
+  port: 8315
+spring:
+  application:
+    name: spring-boot-public
+  cloud:
+    consul:
+      host: consul
+      port: 8500
+      discovery:
+        prefer-agent-address: true

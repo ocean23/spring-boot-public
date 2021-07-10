@@ -1,20 +1,11 @@
-apollo:
-  bootstrap:
-    enabled : true
-    eagerLoad:
-      enabled : true
-    namespaces : application
-
+server:
+  port: 8315
 spring:
   application:
-    name: spring-boot-mongo
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-      base-path: /actuator
-  endpoint:
-    health:
-      show-details: ALWAYS
+    name: spring-boot-public
+  cloud:
+    consul:
+      host: consul
+      port: 8500
+      discovery:
+        prefer-agent-address: true
