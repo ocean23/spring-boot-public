@@ -3,9 +3,3 @@ server:
 spring:
   application:
     name: spring-boot-public
-  cloud:
-    consul:
-      host: 127.0.0.1
-      port: 8500
-      discovery:
-        prefer-agent-address: true

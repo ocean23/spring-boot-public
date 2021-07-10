@@ -1,0 +1,26 @@
+[
+  {
+    "name": "张三",
+    "province": "广东省",
+    "city": "深圳市",
+    "area": "龙华区",
+    "address": "xxx街道",
+    "mobile": "1380000xxx"
+  },
+  {
+    "name": "李四",
+    "province": "广东省",
+    "city": "深圳市",
+    "area": "龙华区",
+    "address": "xxx街道",
+    "mobile": "1380000xxx"
+  },
+  {
+    "name": "王五",
+    "province": "广东省",
+    "city": "深圳市",
+    "area": "龙华区",
+    "address": "xxx街道",
+    "mobile": "1380000xxx"
+  }
+]
